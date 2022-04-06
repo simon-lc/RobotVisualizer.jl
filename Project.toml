@@ -1,0 +1,4 @@
+name = "RobotVisualizer"
+uuid = "72694564-f60b-4882-9057-f9f0ff647ee8"
+authors = ["simon-lc <simonlc@stanford.edu>"]
+version = "0.1.0"
