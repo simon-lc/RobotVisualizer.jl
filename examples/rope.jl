@@ -20,4 +20,4 @@ goal_traj =  [[+1+sin(2π*i/100), -1-0.00i,  1.8+0.2sin(2π*i/100)] for i = 1:10
 anim = Animation(30)
 vis, anim = animate_straight_rope(vis, start_traj, goal_traj, name=:rope1)
 vis, anim = animate_loose_rope(vis, start_traj, goal_traj, rope_length=4.5,
-    anim=anim, name=:rope2, min_altitude=0.02)
+    anim=anim, name=:rope2, min_altitude=0.02, warmstart=false)

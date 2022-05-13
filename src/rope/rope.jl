@@ -69,18 +69,19 @@ end
 
 function animate_loose_rope(vis::Visualizer, start_traj::Vector, goal_traj::Vector;
         anim::Animation=MeshCat.Animation(100), rope_length=30.0, N::Int=50,
-        min_altitude=-Inf, name=:rope)
+        min_altitude=-Inf, name=:rope, warmstart::Bool=true)
     M = length(start_traj)
 
-    a_guess = 1.0
-    dx_guess = 0.0
+    a0 = 1.0
+    dx0 = 0.0
 
     for i = 1:M
         atframe(anim, i) do
             xa = start_traj[i]
             xb = goal_traj[i]
             a_guess, dx_guess = set_loose_rope(vis, xa, xb, rope_length=rope_length,
-                N=N, min_altitude=min_altitude, a_guess=a_guess, dx_guess=dx_guess, name=name)
+                N=N, min_altitude=min_altitude, a_guess=a0, dx_guess=dx0, name=name)
+            warmstart && (a0, dx0 = a_guess, dx_guess)
         end
     end
     setanimation!(vis, anim)
