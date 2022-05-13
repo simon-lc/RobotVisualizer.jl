@@ -1,3 +1,6 @@
+[![CI](https://github.com/simon-lc/RobotVisualizer.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/simon-lc/RobotVisualizer.jl/actions/workflows/CI.yml)
+
+
 # RobotVisualizer.jl
 Tools for robot visualization in MeshCat.jl.
 
