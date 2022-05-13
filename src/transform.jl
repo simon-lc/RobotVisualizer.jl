@@ -8,7 +8,7 @@ function link_transform(start, goal)
     q = axis_angle_to_quaternion(ang * normalize!(ax))
 
     rope_length = norm(goal - start)
-    scaling = LinearMap(I * Diagonal([1.0, 1.0, rope_length]))
-    transform = compose(Translation(start), LinearMap(q))
+    scaling = MeshCat.LinearMap(I * Diagonal([1.0, 1.0, rope_length]))
+    transform = MeshCat.compose(MeshCat.Translation(start), MeshCat.LinearMap(rotationmatrix(q)))
     return transform, scaling
 end

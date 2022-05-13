@@ -28,11 +28,12 @@ function set_straight_rope(vis::Visualizer, x_start, x_goal; N::Int=10, name::Sy
 end
 
 function set_loose_rope(vis::Visualizer, x_start, x_goal; N::Int=10,
-        rope_length=2norm(x_goal - x_start), min_altitude=-Inf, a_guess=1.0, dx_guess=0.0, name::Symbol=:rope)
+        rope_length=2norm(x_goal - x_start), min_altitude=-Inf, a_guess=1.0, dx_guess=0.0,
+        name::Symbol=:rope)
     v = x_goal - x_start
     shadow_rope_length = norm(v[1:2])
     θ = atan(v[2], v[1])
-    R = rotationmatrix(RotZ(-θ))
+    R = Matrix(RotZ(-θ))
     v̄ = R * v # rotated into the xz plane
 
     a, dx, dy = catenary_parameters(zeros(2), v̄[[1,3]], rope_length, a_guess=a_guess, dx_guess=dx_guess)
@@ -67,7 +68,8 @@ function animate_straight_rope(vis::Visualizer, start_traj::Vector, goal_traj::V
 end
 
 function animate_loose_rope(vis::Visualizer, start_traj::Vector, goal_traj::Vector;
-        anim::Animation=MeshCat.Animation(100), rope_length=30.0, N::Int=50, min_altitude=-Inf, name=:rope)
+        anim::Animation=MeshCat.Animation(100), rope_length=30.0, N::Int=50,
+        min_altitude=-Inf, name=:rope)
     M = length(start_traj)
 
     a_guess = 1.0
