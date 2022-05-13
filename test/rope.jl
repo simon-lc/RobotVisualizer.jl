@@ -5,6 +5,7 @@
     set_light!(vis)
     set_floor!(vis)
     set_background!(vis)
+    set_camera!(vis)
 
     build_rope(vis, N=50, name=:rope1)
     build_rope(vis, N=50, name=:rope2)
