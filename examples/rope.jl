@@ -1,7 +1,6 @@
 using RobotVisualizer
 using MeshCat
 
-
 # ## visualizer
 vis = MeshCat.Visualizer()
 open(vis)
@@ -22,5 +21,3 @@ anim = Animation(30)
 vis, anim = animate_straight_rope(vis, start_traj, goal_traj, name=:rope1)
 vis, anim = animate_loose_rope(vis, start_traj, goal_traj, rope_length=4.5,
     anim=anim, name=:rope2, min_altitude=0.02)
-
-convert_frames_to_video_and_gif("rope_loop")

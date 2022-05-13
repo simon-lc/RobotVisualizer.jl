@@ -7,6 +7,7 @@ using LinearAlgebra
 using MeshCat
 using Quaternions
 using Rotations
+using FFMPEG
 
 include("rope/catenary.jl")
 include("rope/optim.jl")
