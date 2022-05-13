@@ -6,7 +6,6 @@ using FiniteDiff
 using LinearAlgebra
 using MeshCat
 using Quaternions
-using Rotations
 using FFMPEG
 
 
