@@ -71,7 +71,7 @@ end
 
 function animate_loose_rope(vis::Visualizer, start_traj::Vector, goal_traj::Vector;
         anim::Animation=MeshCat.Animation(100), rope_length=30.0, N::Int=50,
-        min_altitude=-Inf, iterations=500, tolerance=1e-6, name=:rope, warmstart::Bool=true)
+        min_altitude=-Inf, iterations=500, tolerance=1e-6, name=:rope, warmstart::Bool=false)
     M = length(start_traj)
 
     a0 = 1.0
