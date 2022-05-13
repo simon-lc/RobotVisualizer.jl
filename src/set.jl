@@ -35,8 +35,6 @@ function set_floor!(vis::Visualizer;
     setobject!(vis[:floor], obj, mat)
 	p = origin
 	q = axes_pair_to_quaternion([0,0,1.], normal)
-    @show p
-	@show q
     settransform!(vis[:floor], MeshCat.compose(
 		MeshCat.Translation(p...),
 		MeshCat.LinearMap(rotationmatrix(q)),
