@@ -17,6 +17,9 @@ set_loose_rope(vis, [0,0,1.0], [3,3,3.0], rope_length=10, N=50, min_altitude=-0.
 start_traj = [[-1-sin(2π*i/100), +1+0.00i,  2-0.0i] for i = 1:100]
 goal_traj =  [[+1+sin(2π*i/100), -1-0.00i,  1.8+0.2sin(2π*i/100)] for i = 1:100]
 
+start_traj = [[-0-0sin(2π*i/100), +0+0.00i,  3-0.0i] for i = 1:100]
+goal_traj =  [[+1e-3+sin(2π*i/100), -0-0.00i,  2-0.0i] for i = 1:100]
+
 anim = Animation(30)
 vis, anim = animate_straight_rope(vis, start_traj, goal_traj, name=:rope1)
 vis, anim = animate_loose_rope(vis, start_traj, goal_traj, rope_length=4.5,

@@ -29,6 +29,7 @@ end
 
 function set_loose_rope(vis::Visualizer, x_start, x_goal; N::Int=10,
         rope_length=2norm(x_goal - x_start), min_altitude=-Inf, a_guess=1.0, dx_guess=0.0,
+        iterations=500, tolerance=1e-6,
         name::Symbol=:rope)
     v = x_goal - x_start
     shadow_rope_length = norm(v[1:2])
@@ -36,7 +37,8 @@ function set_loose_rope(vis::Visualizer, x_start, x_goal; N::Int=10,
     R = Matrix(RotZ(-θ))
     v̄ = R * v # rotated into the xz plane
 
-    a, dx, dy = catenary_parameters(zeros(2), v̄[[1,3]], rope_length, a_guess=a_guess, dx_guess=dx_guess)
+    a, dx, dy = catenary_parameters(zeros(2), v̄[[1,3]], rope_length, a_guess=a_guess, dx_guess=dx_guess,
+        iterations=iterations, tolerance=tolerance)
     Λ = shadow_rope_length * range(0,1,length=N+1)
     x = []
     for i = 1:N+1
@@ -69,7 +71,7 @@ end
 
 function animate_loose_rope(vis::Visualizer, start_traj::Vector, goal_traj::Vector;
         anim::Animation=MeshCat.Animation(100), rope_length=30.0, N::Int=50,
-        min_altitude=-Inf, name=:rope, warmstart::Bool=true)
+        min_altitude=-Inf, iterations=500, tolerance=1e-6, name=:rope, warmstart::Bool=true)
     M = length(start_traj)
 
     a0 = 1.0
@@ -80,7 +82,7 @@ function animate_loose_rope(vis::Visualizer, start_traj::Vector, goal_traj::Vect
             xa = start_traj[i]
             xb = goal_traj[i]
             a_guess, dx_guess = set_loose_rope(vis, xa, xb, rope_length=rope_length,
-                N=N, min_altitude=min_altitude, a_guess=a0, dx_guess=dx0, name=name)
+                N=N, min_altitude=min_altitude, a_guess=a0, dx_guess=dx0, name=name, iterations=iterations, tolerance=tolerance)
             warmstart && (a0, dx0 = a_guess, dx_guess)
         end
     end
