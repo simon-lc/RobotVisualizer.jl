@@ -24,7 +24,8 @@ export
     set_light!,
     set_floor!,
     set_background!,
-    set_surface!
+    set_surface!,
+    set_camera!
 
 export
     build_rope,
