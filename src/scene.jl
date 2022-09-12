@@ -53,21 +53,31 @@ end
     vis::Visualizer
     f: implicit function representing surface
     xlims: lateral domain for surface
-    ylims: longitudinal domain for surface
+	ylims: longitudinal domain for surface
+    zlims: vertical domain for surface
     color: RGBA
     n: number of discretization points along each domain
 """
 function set_surface!(vis::Visualizer, f::Any;
     xlims=[-20.0, 20.0],
     ylims=[-20.0, 20.0],
-    color=RGBA(1.0, 1.0, 1.0, 0.0),
-    n::Int=200)
+    zlims=[-4.0, 4.0],
+    color=RGBA(1.0, 1.0, 1.0, 1.0),
+    wireframe=false,
+	name::Symbol=:surface,
+    n::Int=100)
     mesh = GeometryBasics.Mesh(f,
-        HyperRectangle(Vec(xlims[1], ylims[1], -2.0), Vec(xlims[2] - xlims[1], ylims[2] - ylims[1], 4.0)),
-        Meshing.MarchingCubes(), samples=(n, n, Int(floor(n / 8))))
-    setobject!(vis["surface"], mesh, MeshPhongMaterial(color=color))
+        MeshCat.HyperRectangle(
+            MeshCat.Vec(xlims[1], ylims[1], zlims[1]),
+            MeshCat.Vec(
+				xlims[2] - xlims[1],
+				ylims[2] - ylims[1],
+				zlims[2] - zlims[1])),
+        Meshing.MarchingCubes(), samples=(n, n, n))
+    setobject!(vis[name], mesh, MeshPhongMaterial(color=color, wireframe=wireframe))
     return nothing
 end
+
 
 """
     set_light!(vis; ambient, fill, pointX, pointXshadow, direction)
@@ -110,43 +120,6 @@ function set_camera!(vis::Visualizer;
             MeshCat.Translation(cam_pos...),
         ))
     return nothing
-end
-
-"""
-    set_arrow!(vis, origin, direction; color, shaft_radius, max_head_radius, scaling, name)
-
-    adds an arrow object to scene
-
-    vis: Visualizer
-    origin: point defining arrow base
-    direction: vector defining arrow
-    color: RGBA
-    shaft_radius: dimension of arrow shaft
-    max_head_radius: dimension of arrow head base
-    scaling: parameter that scales the entire arrow
-    name: Symbol
-"""
-function set_arrow!(vis, origin, direction;
-    color=Colors.RGBA(1.0, 0.0, 0.0, 1.0),
-    shaft_radius=0.0125,
-    max_head_radius=0.025,
-    scaling=0.2,
-    name=:name)
-
-    # create arrow
-    force_vis = ArrowVisualizer(vis[name])
-    setobject!(force_vis, MeshPhongMaterial(color=color))
-
-    # direction
-    scaled_direction = scaling * direction
-
-    # set
-    settransform!(force_vis,
-        Point(origin...),
-        Vec(scaled_direction...),
-        shaft_radius=shaft_radius,
-        max_head_radius=max_head_radius)
-
 end
 
 function set_background!(vis::Visualizer; top_color=RGBA(1,1,1.0), bottom_color=RGBA(1,1,1.0))

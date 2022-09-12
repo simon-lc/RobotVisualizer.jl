@@ -14,18 +14,29 @@ include("rope/catenary.jl")
 include("rope/optim.jl")
 include("rope/rope.jl")
 
-include("gif.jl")
-include("set.jl")
-include("transform.jl")
+
+include("frame.jl")
+include("segment.jl")
+include("polytope.jl")
+include("output.jl")
+include("scene.jl")
 include("utils.jl")
 
 
 export
-    set_light!,
     set_floor!,
-    set_background!,
     set_surface!,
-    set_camera!
+    set_light!,
+    set_background!,
+    set_camera!,
+    build_2d_polytope,
+    set_2d_polytope,
+    build_polytope,
+    set_polytope,
+    build_2d_frame,
+    set_2d_frame!,
+    build_segment,
+    set_segment!
 
 export
     build_rope,
