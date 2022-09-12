@@ -5,8 +5,8 @@ function build_polytope!(vis::Visualizer, A::Matrix{T}, b::Vector{T};
         name::Symbol=:polytope,
         color=RGBA(0.8, 0.8, 0.8, 1.0)) where T
 
-    h = hrep(A, b)
-    p = polyhedron(h)
+    h = Polyhedra.hrep(A, b)
+    p = Polyhedra.polyhedron(h)
     m = Polyhedra.Mesh(p)
     try
         setobject!(vis[name], m, MeshPhongMaterial(color=color))
@@ -33,9 +33,10 @@ function set_2d_polytope!(vis::Visualizer, p::Vector{T}, q::Vector{T};
         name::Symbol=:polytope) where T
     pe = [0; p]
 
+    rotX = Quaternion(cos(q[1]/2), sin(q[1]/2), 0.0, 0.0)
     settransform!(vis[name], MeshCat.compose(
-        MeshCat.Translation(SVector{3}(pe)),
-        MeshCat.LinearMap(rotationmatrix(RotX(q[1]))),
+        MeshCat.Translation(MeshCat.SVector{3}(pe)),
+        MeshCat.LinearMap(rotationmatrix(rotX)),
         )
     )
     return nothing

@@ -8,6 +8,8 @@ using MeshCat
 using Quaternions
 using Rotations
 using FFMPEG
+using Polyhedra
+using Meshing
 
 
 include("rope/catenary.jl")

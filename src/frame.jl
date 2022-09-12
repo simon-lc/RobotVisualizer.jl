@@ -29,7 +29,7 @@ end
 
 function set_2d_frame!(vis::Visualizer, origin, normal, tangent; name::Symbol=:contact)
     settransform!(vis[:contacts][name][:origin],
-        MeshCat.Translation(SVector{3}(0, origin...)))
+        MeshCat.Translation(MeshCat.SVector{3}(0, origin...)))
     set_segment!(vis[:contacts][name], [0; origin], [0; origin+normal]; name=:normal)
     set_segment!(vis[:contacts][name], [0; origin], [0; origin+tangent]; name=:tangent)
     return nothing

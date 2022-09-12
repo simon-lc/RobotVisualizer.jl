@@ -26,6 +26,7 @@ function set_floor!(vis::Visualizer;
 	    imagename="tile.png",
 	    axis::Bool=false,
 	    grid::Bool=false)
+
     image = PngImage(joinpath(module_dir(), "assets", imagename))
     repeat = Int.(ceil.(tilepermeter * [x, y]))
     texture = Texture(image=image, wrap=(1,1), repeat=(repeat[1],repeat[2]))
@@ -59,13 +60,15 @@ end
     n: number of discretization points along each domain
 """
 function set_surface!(vis::Visualizer, f::Any;
-    xlims=[-20.0, 20.0],
-    ylims=[-20.0, 20.0],
-    zlims=[-4.0, 4.0],
-    color=RGBA(1.0, 1.0, 1.0, 1.0),
-    wireframe=false,
-	name::Symbol=:surface,
-    n::Int=100)
+	    xlims=[-20.0, 20.0],
+	    ylims=[-20.0, 20.0],
+	    zlims=[-4.0, 4.0],
+	    color=RGBA(1.0, 1.0, 1.0, 1.0),
+	    wireframe=false,
+		name::Symbol=:surface,
+	    n::Int=100)
+
+	Meshing.MarchingCubes()
     mesh = GeometryBasics.Mesh(f,
         MeshCat.HyperRectangle(
             MeshCat.Vec(xlims[1], ylims[1], zlims[1]),
@@ -73,7 +76,7 @@ function set_surface!(vis::Visualizer, f::Any;
 				xlims[2] - xlims[1],
 				ylims[2] - ylims[1],
 				zlims[2] - zlims[1])),
-        Meshing.MarchingCubes(), samples=(n, n, n))
+		Meshing.MarchingCubes(), samples=(n, n, n))
     setobject!(vis[name], mesh, MeshPhongMaterial(color=color, wireframe=wireframe))
     return nothing
 end
@@ -89,8 +92,8 @@ end
     direction: positive or negative direction for light
 """
 function set_light!(vis::Visualizer;
-    ambient=0.35,
-    direction::String="Positive")
+	    ambient=0.35,
+	    direction::String="Positive")
 
     setprop!(vis["/Lights/AmbientLight/<object>"], "intensity", ambient)
     setprop!(vis["/Lights/FillLight/<object>"], "intensity", 0.25)
@@ -109,8 +112,8 @@ end
     cam_pos: position of camera
 """
 function set_camera!(vis::Visualizer;
-    zoom=1.0,
-    cam_pos=nothing)
+	    zoom=1.0,
+	    cam_pos=nothing)
 
     camvis=vis["/Cameras/default/rotated/<object>"]
     setprop!(camvis, "zoom", zoom)
