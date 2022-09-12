@@ -16,10 +16,10 @@ include("rope/rope.jl")
 
 
 include("frame.jl")
-include("segment.jl")
-include("polytope.jl")
 include("output.jl")
+include("polytope.jl")
 include("scene.jl")
+include("segment.jl")
 include("utils.jl")
 
 
@@ -29,12 +29,12 @@ export
     set_light!,
     set_background!,
     set_camera!,
-    build_2d_polytope,
-    build_polytope,
-    set_2d_polytope,
-    build_2d_frame,
+    build_2d_polytope!,
+    build_polytope!,
+    set_2d_polytope!,
+    build_2d_frame!,
     set_2d_frame!,
-    build_segment,
+    build_segment!,
     set_segment!
 
 export

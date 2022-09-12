@@ -8,7 +8,7 @@
     RobotVisualizer.set_camera!(vis)
 
     # frame
-    RobotVisualizer.build_2d_frame(vis, name=:contact)
+    RobotVisualizer.build_2d_frame!(vis, name=:contact)
     origin = [1, 2, 3.0]
     normal = [1, 0, 0.0]
     tangent = [0, 1, 0.0]
