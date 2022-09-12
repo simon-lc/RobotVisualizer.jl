@@ -27,7 +27,7 @@ function build_2d_frame!(vis::Visualizer;
     return nothing
 end
 
-function set_2d_frame!(vis::Visualizer, contact, origin, normal, tangent; name=contact.name)
+function set_2d_frame!(vis::Visualizer, origin, normal, tangent; name::Symbol=:contact)
     settransform!(vis[:contacts][name][:origin],
         MeshCat.Translation(SVector{3}(0, origin...)))
     set_segment!(vis[:contacts][name], [0; origin], [0; origin+normal]; name=:normal)

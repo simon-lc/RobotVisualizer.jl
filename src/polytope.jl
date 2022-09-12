@@ -29,17 +29,6 @@ function build_2d_polytope!(vis::Visualizer, A::Matrix{T}, b::Vector{T};
     return nothing
 end
 
-function set_polytope!(vis::Visualizer, p::Vector{T}, q::Vector{T};
-        name::Symbol=:polytope) where T
-
-    settransform!(vis[name], MeshCat.compose(
-        MeshCat.Translation(p...),
-        MeshCat.LinearMap(z_rotation(q)),
-        )
-    )
-    return nothing
-end
-
 function set_2d_polytope!(vis::Visualizer, p::Vector{T}, q::Vector{T};
         name::Symbol=:polytope) where T
     pe = [0; p]
