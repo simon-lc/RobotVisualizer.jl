@@ -14,3 +14,10 @@ Visualize ropes using the catenary equation.
  - set lighting
  - set background
  - set floor
+ - set segment
+ - set 2d frame
+ - set polytope
+ - set arrow
+
+### ToDo's
+- remove dependency on Polyhedra and switch to Meshes.jl for Polytope support
