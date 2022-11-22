@@ -17,6 +17,7 @@ end
 
 function build_2d_polytope!(vis::Visualizer, A::Matrix{T}, b::Vector{T};
         name::Symbol=:polytope,
+        thickness=0.10,
         color=RGBA(0.8, 0.8, 0.8, 1.0)) where T
 
     n = size(A)[1]
@@ -24,7 +25,7 @@ function build_2d_polytope!(vis::Visualizer, A::Matrix{T}, b::Vector{T};
     Ae = [Ae;
          -1 0 0;
           1 0 0]
-    be = [b; 0.1; 00]
+    be = [b; thickness/2; thickness/2]
     build_polytope!(vis, Ae, be, name=name, color=color)
     return nothing
 end
