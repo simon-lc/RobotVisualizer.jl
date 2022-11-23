@@ -7,12 +7,27 @@
     RobotVisualizer.set_background!(vis)
     RobotVisualizer.set_camera!(vis)
 
+    # # frame
+    # RobotVisualizer.build_2d_frame!(vis, name=:contact)
+    # origin = [1, 2.0]
+    # normal = [1, 0.0]
+    # tangent = [0, 1.0]
+    # RobotVisualizer.set_2d_frame!(vis, origin, normal, tangent; name=:contact)
+
     # frame
-    RobotVisualizer.build_2d_frame!(vis, name=:contact)
+    RobotVisualizer.build_frame!(vis, dimension=2, name=:contact)
     origin = [1, 2.0]
     normal = [1, 0.0]
-    tangent = [0, 1.0]
-    RobotVisualizer.set_2d_frame!(vis, origin, normal, tangent; name=:contact)
+    tangent_x = [0, 0.0]
+    tangent_y = [0, 1.0]
+    RobotVisualizer.set_frame!(vis, origin, normal, tangent_x, tangent_y; name=:contact)
+
+    RobotVisualizer.build_frame!(vis, dimension=3, name=:contact)
+    origin = [1, 1, 2.0]
+    normal = [0, 0, 1.0]
+    tangent_x = [1, 0, 0.0]
+    tangent_y = [0, 1, 0.0]
+    RobotVisualizer.set_frame!(vis, origin, normal, tangent_x, tangent_y; name=:contact)
 
     # polytope
     A = [
